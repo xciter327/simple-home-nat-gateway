@@ -16,3 +16,4 @@ Loosely based on the Archlinux pages for the relevant services and offical tool 
 - CD via internal Gitlab instance
 - Look into traffic marking via iptables and ipset
 - Look into scapring iptables metrics via Prometheus
+- Implement fair egress queuing via CAKE `tc qdisc replace dev eth0 root cake bandwidth 995mbit besteffort`
