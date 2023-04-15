@@ -5,8 +5,6 @@ Loosely based on the Archlinux pages for the relevant services and offical tool 
 # TODO
 - Source shared environment variables from a single source of truth
 - Look into managing the power envelope of the CPU [pstate-frequency](https://github.com/pyamsoft/pstate-frequency) or ThermalD
-- Docker setup with host only networking
-- NTPd
 - Internal DNS zones
 - Include Prometheus/Grafana stack
 - Blackbox monitor for ad-hoc endpoints/services
