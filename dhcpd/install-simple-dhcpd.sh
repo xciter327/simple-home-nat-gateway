@@ -1,11 +1,25 @@
+#/bin/bash
+set e
+# path to config file. One level up by default
+CONFIG_FILE="$PWD../config.json"
+
+LAN_NETWORK="jq -r .lan-network $CONFIG_FILE"
+LAN_DOMAIN="jq -r .lan-domain $CONFIG_FILE"
+DNS_RESOLVER="jq -r .dns-resolver $CONFIG_FILE"
+
+# Install BIND
+yum install -y dhcpd
+
+# Seed configuration
+cat > /etc/dhcpd.conf << EOF
 # dhcpd.conf
 #
 # Sample configuration file for ISC dhcpd
 #
 
 # option definitions common to all supported networks...
-option domain-name "network.home";
-option domain-name-servers 192.168.1.1;
+option domain-name "$LAN_DOMAIN";
+option domain-name-servers "$DNS_RESOLVER";
 
 default-lease-time 600;
 max-lease-time 7200;
@@ -21,7 +35,7 @@ max-lease-time 7200;
 # have to hack syslog.conf to complete the redirection).
 log-facility local7;
 
-# No service will be given on this subnet, but declaring it helps the 
+# No service will be given on this subnet, but declaring it helps the
 # DHCP server to understand the network topology.
 
 # A slightly different configuration for an internal subnet.
@@ -31,4 +45,4 @@ subnet 192.168.1.0 netmask 255.255.255.0 {
   option domain-name "network.home";
   option broadcast-address 192.168.1.255;
 }
-
+EOF

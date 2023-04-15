@@ -1,7 +1,12 @@
 #/bin/bash
-LAN_INTERFACE='enp3s0'
-WAN_INTERFACE='enp2s0'
-LAN_NETWORK='192.168.1.0/24'
+set e
+# path to config file. One level up by default
+CONFIG_FILE="$PWD../config.json"
+
+
+WAN_INTERFACE="jq -r .wan-interface $CONFIG_FILE"
+LAN_INTERFACE="jq -r .lan-interface $CONFIG_FILE"
+LAN_NETWORK="jq -r .lan-network $CONFIG_FILE"
 
 echo "WAN_INTERFACE: $WAN_INTERFACE"
 echo "LAN_INTERFACE: $LAN_INTERFACE"
