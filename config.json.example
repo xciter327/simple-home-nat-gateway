@@ -4,6 +4,6 @@
   "lan-network": "192.168.1.0/24",
   "lan-domain": "network.home",
   "lan-resolver": "192.168.1.1",
-  "nextdns-toklen": "XXXXXXXXXX"
+  "nextdns-token": "XXXXXXXXXX"
 }
 
