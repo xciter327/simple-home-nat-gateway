@@ -2,6 +2,8 @@
 
 Loosely based on the Archlinux pages for the relevant services and offical tool documentation
 
+Made for [iKoolcore R1](https://www.ikoolcore.com/en-nl/products/ikoolcore), but it should mostly be usable for any other box.
+
 # TODO
 - Look into managing the power envelope of the CPU [pstate-frequency](https://github.com/pyamsoft/pstate-frequency) or ThermalD
 - Internal DNS zones
