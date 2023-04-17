@@ -1,1 +1,3 @@
 config.json
+grafana-prometheus/grafana/grafana_data/*
+grafana-prometheus/prometheus/prometheus_data/*
