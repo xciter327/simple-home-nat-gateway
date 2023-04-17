@@ -1,0 +1,8 @@
+---
+- targets:
+    - https://google.com/;google.com
+    - https://github.com/;github.com
+    - https://apple.com/;apple.com
+    - https://cloudflare.com/;cloudflare.com
+    - https://fastly.com/;fastly.com
+    - https://akamai.com/;akamai.com

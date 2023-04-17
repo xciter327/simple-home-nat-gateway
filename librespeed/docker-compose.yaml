@@ -1,0 +1,18 @@
+---
+version: "2.1"
+services:
+  librespeed:
+    image: ghcr.io/linuxserver/librespeed
+    container_name: librespeed
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Amsterdam
+      - PASSWORD=PASSWORD
+      - CUSTOM_RESULTS=false
+      - DB_TYPE=sqlite
+      - WEBPORT=8081
+    volumes:
+      - /services/librespeed/config:/config
+    restart: unless-stopped
+    network_mode: host

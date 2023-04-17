@@ -1,0 +1,52 @@
+version: "3.4"
+services:
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus/pinghosts.yaml:/etc/prometheus/pinghosts.yaml
+      - ./prometheus/prometheus_data:/prometheus
+    network_mode: host
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana
+    volumes:
+      - ./grafana/grafana.ini:/etc/grafana/grafana.ini
+      - ./grafana/datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
+      - ./grafana/dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yml
+      - ./grafana/dashboards:/etc/grafana/provisioning/dashboards/dashboards
+      - ./grafana/grafana_data:/var/lib/grafana:rw
+    network_mode: host
+    restart: unless-stopped
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: node-exporter
+    restart: unless-stopped
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
+    network_mode: host
+
+  speedtest:
+    image: miguelndecarvalho/speedtest-exporter
+    restart: unless-stopped
+    network_mode: host
+
+  ping:
+    tty: true
+    stdin_open: true
+    image: prom/blackbox-exporter
+    restart: unless-stopped
+    volumes:
+      - ./blackbox:/config
+    command:
+      - '--config.file=/config/blackbox.yml'
+    network_mode: host

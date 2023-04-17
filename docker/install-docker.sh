@@ -15,6 +15,9 @@ grep -qxF '{ "iptables": false }' /etc/docker/daemon.json || echo '{ "iptables":
 # Start Docker
 systemctl start docker
 
+# Enable docker service at start
+systemctl enable docker
+
 # Allow user to run docker commands without sudo
 grep -qxF "$SUDO_USER        ALL=(ALL)       NOPASSWD: /usr/bin/docker" /etc/sudoers.d/docker || echo "$SUDO_USER        ALL=(ALL)       NOPASSWD: /usr/bin/docker" >> /etc/sudoers.d/docker
 
